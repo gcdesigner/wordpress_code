@@ -1,0 +1,122 @@
+// Adiciona Menu "Theme Panel" no Admin
+function add_theme_menu_item() {
+	add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", "theme_settings_page", null, 99);
+}
+add_action("admin_menu", "add_theme_menu_item");
+
+// Cria a pagina de com as sessões e formulário
+function theme_settings_page() {
+  ?>
+    <div class="wrap">
+	    <h1>Theme Panel</h1>
+	    <form method="post" action="options.php">
+        <?php
+					settings_fields("newsletter");
+          settings_fields("social");
+          do_settings_sections("theme-options");
+          submit_button();
+        ?>
+	    </form>
+		</div>
+	<?php
+}
+
+// Cria o campo email do setting_fields("newsletter")
+function display_email_element() {
+	?>
+		<input type="email" name="email_url" size="50" id="email_url" value="<?php echo get_option('email_url'); ?>" />
+	<?php
+}
+
+// Cria o campo twitter do setting_fields("social")
+function display_twitter_element() {
+	?>
+		<input type="text" name="twitter_url" size="50" id="twitter_url" value="<?php echo get_option('twitter_url'); ?>" />
+		<br>
+		<small><i>http://twitter.com.br/yourprofileurl</i></small>
+	<?php
+}
+
+function display_facebook_element() {
+	?>
+  	<input type="text" name="facebook_url" size="50" id="facebook_url" value="<?php echo get_option('facebook_url'); ?>" />
+		<br>
+		<small><i>http://facebook.com/yourprofileurl</i></small>
+  <?php
+}
+
+function display_instagram_element() {
+	?>
+  	<input type="text" name="instagram_url" size="50" id="instagram_url" value="<?php echo get_option('instagram_url'); ?>" />
+		<br>
+		<small><i>http://instagram.com/yourprofileurl</i></small>
+  <?php
+}
+
+function display_google_element() {
+	?>
+  	<input type="text" name="google_url" size="50" id="google_url" value="<?php echo get_option('google_url'); ?>" />
+		<br>
+		<small><i>https://plus.google.com.br/xxxxxxxx/posts</i></small>
+  <?php
+}
+
+function display_pinterest_element() {
+	?>
+  	<input type="text" name="pinterest_url" size="50" id="pinterest_url" value="<?php echo get_option('pinterest_url'); ?>" />
+		<br>
+		<small><i>http://pinterest.com/yourprofileurl</i></small>
+  <?php
+}
+
+function display_vimeo_element() {
+	?>
+  	<input type="text" name="vimeo_url" size="50" id="vimeo_url" value="<?php echo get_option('vimeo_url'); ?>" />
+		<br>
+		<small><i>http://vimeo.com/userxxxxxxx</i></small>
+  <?php
+}
+
+function display_skype_element() {
+	?>
+  	<input type="text" name="skype_url" size="50" id="skype_url" value="<?php echo get_option('skype_url'); ?>" />
+		<br>
+		<small><i>profile_name</i></small>
+  <?php
+}
+
+function display_linkedin_element() {
+	?>
+  	<input type="text" name="linkedin_url" size="50" id="linkedin_url" value="<?php echo get_option('linkedin_url'); ?>" />
+		<br>
+		<small><i>http://linkedin.com/yourprofileurl</i></small>
+  <?php
+}
+
+// Adiciona os campos na tela
+function display_theme_panel_fields() {
+	add_settings_section("newsletter", "Newsletter", null, "theme-options");
+	add_settings_field("email_url", "Email", "display_email_element", "theme-options", "newsletter");
+
+	add_settings_section("social", "Redes Sociais", null, "theme-options");
+	add_settings_field("twitter_url", "Twitter", "display_twitter_element", "theme-options", "social");
+  add_settings_field("facebook_url", "Facebook", "display_facebook_element", "theme-options", "social");
+  add_settings_field("instagram_url", "Instagram", "display_instagram_element", "theme-options", "social");
+  add_settings_field("google_url", "Google", "display_google_element", "theme-options", "social");
+  add_settings_field("pinterest_url", "Pinterest", "display_pinterest_element", "theme-options", "social");
+  add_settings_field("vimeo_url", "Vimeo", "display_vimeo_element", "theme-options", "social");
+  add_settings_field("skype_url", "Skype", "display_skype_element", "theme-options", "social");
+  add_settings_field("linkedin_url", "Linkedin", "display_linkedin_element", "theme-options", "social");
+	register_setting("newsletter", "email_url");
+	register_setting("social", "twitter_url");
+  register_setting("social", "facebook_url");
+  register_setting("social", "instagram_url");
+  register_setting("social", "google_url");
+  register_setting("social", "pinterest_url");
+  register_setting("social", "vimeo_url");
+  register_setting("social", "skype_url");
+  register_setting("social", "linkedin_url");
+}
+
+// Adiciona a ação
+add_action("admin_init", "display_theme_panel_fields");
