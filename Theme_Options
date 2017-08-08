@@ -120,3 +120,8 @@ function display_theme_panel_fields() {
 
 // Adiciona a ação
 add_action("admin_init", "display_theme_panel_fields");
+
+
+// Adiciona os campos no front
+$facebook_url = get_option('facebook_url');
+$twitter_url = get_option('twitter_url');
