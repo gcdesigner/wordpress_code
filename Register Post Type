@@ -1,0 +1,11 @@
+// register custom post type 'my_custom_post_type' with 'supports' parameter
+	add_action( 'init', 'create_my_post_type' );
+	function create_my_post_type() {
+	  register_post_type( 'my_custom_post_type',
+	    array(
+	      'labels' => array( 'name' => __( 'Livros' ) ),
+	      'public' => true,
+	      'supports' => array('title', 'editor', 'post-formats')
+		  )
+		);
+	}
